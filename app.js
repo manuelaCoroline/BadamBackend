@@ -1,10 +1,18 @@
 import express from "express";
+import cookieParser from 'cookie-parser';
+import cors from "cors";
 import routes from "./src/routes/index.js"
 
 const app = express();
 
-app.use(express.json());  //Le serveur pourra lire automatiquement le JSON (req.body)
+app.use(cors({
+    origin: "http://localhost:5173", 
+    credentials: true
+}));
 
-app.use("/",routes); //Toutes les routes passent par index.js
+app.use(express.json());
+app.use(cookieParser());
+
+app.use("/", routes);
 
 export default app;
